@@ -1,3 +1,7 @@
+//Codigo que crea la variable donde se almacenará el saldo simulado
+let saldoCajaAhorro = (localStorage.getItem("saldo"));
+//Operador avanzado que verifica si existe el objeto saldo, si no es así lo crea
+saldoCajaAhorro == null && localStorage.setItem("saldo", 150000);
 //Constructor que crea los objetos que van a  simular las operaciones bancarias realizadas por el usuario en el último mes
 class Operacion {
   constructor(fecha, hora, operacion, monto, saldo) {
