@@ -1,4 +1,7 @@
-let saldoCajaAhorro = 150000;
+//Variable que recupera la informacion del local storage
+let saldoCajaOperable = localStorage.getItem("saldo");
+//Funcion que convierte el dato recuperado del localstorage a numero
+const convertirStorageANumero = () => parseFloat(saldoCajaOperable);
 //Codigo que captura el boton que confirma la operacion
 const captura = document.getElementById("extracciones-submit");
 //Codigo que captura el boton que modifica la operacion 
@@ -17,9 +20,15 @@ const extraerDinero = () => inputExtraccion.value;
 const parsearDineroExtraido = () => parseInt(extraerDinero());
 //Codigo que actualiza el saldo de la caja de ahorro simulada
 const actualizarSaldoCajaAhorro = () => {
-  saldoCajaAhorro = saldoCajaAhorro - parsearDineroExtraido();
+  saldoCajaAhorro = convertirStorageANumero() - parsearDineroExtraido();
   return saldoCajaAhorro;
 }
+//Funcion que actualiza el saldo almacenado en el localstorage
+const actualizarSaldoStorage = () =>
+  (saldoCajaAhorro = localStorage.setItem(
+    "saldo",
+    actualizarSaldoCajaAhorro()
+  ));
 //Funcion que convierte al formato de moneda local el dato parseado
 const numeroADinero = () => numeroAPesos(extraerDinero());
 //Codigo que convierte al formato de moneda local el saldo simulado
@@ -44,26 +53,36 @@ captura.onclick = () => {
     }
   }
   //Codigo que utiliza el constructor Depositos para crear un nuevo objeto que contiene los datos de la operacion realizada
-  nuevaExtraccion = new Extraccion(
+  operarExtraccion = new Extraccion(
     capturarDiaExtraccion(),
     capturarHoraExtraccion(),
     nombrarOperacion(),
     numeroADinero(),
-    convertirSaldoADinero()
+    convertirSaldoADinero(),
   );
   //Llamada a las funciones declaradas 
   confirmarOperacion();
   modificarOpcion();
   agregarTexto();
   modificarOpcion();
+  actualizarSaldoStorage();
 };
 //Funcion que devuelve al usuario la confirmacion de su operacion 
 const text = document.querySelector(".text");
-confirmarOperacion = () => {
+const confirmarOperacion = () => {
   text.innerHTML = "";
-  text.innerText = `
-  Operacion realizada con exito. Su saldo es: ${nuevaExtraccion.saldo}
-  `;
+  Swal.fire({
+    icon: "success",
+    title: `Operación realizada con éxito.`, 
+    text: `Su saldo es ${operarExtraccion.saldo}`,
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "Aceptar",
+    showClass: {
+      popup: "animate__animated animate__fadeIn",
+    },
+  }).then(function () {
+    window.location.href = "opcion-extracciones.html";
+  });
 }
 // Funcion que limpia el campo input en caso de que el usuario quiera modificar el importe a extraer
 clean.onclick = () => {
