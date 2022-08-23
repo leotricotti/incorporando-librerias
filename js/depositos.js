@@ -1,4 +1,5 @@
-let saldoCajaAhorro = 150000;
+let saldoCajaOperable =  localStorage.getItem('saldo');
+const convertirStorageANumero = () => parseFloat(saldoCajaOperable);
 //Codigo que captura el boton que confirma la operacion
 const captura = document.getElementById("depositos-submit");
 //Codigo que captura el boton que modifica la operacion 
@@ -18,40 +19,45 @@ captura.onclick = () => {
     }
   }
   //Codigo que utiliza el constructor Depositos para crear un nuevo objeto que contiene los datos de la operacion realizada
-  nuevoDeposito = new Operacion(
+  nuevaOperacion = new Operacion(
     capturarDiaDeposito(),
     capturarHoraDeposito(),
     nombrarOperacion(),
     numeroADinero(),
     convertirSaldoADinero()
   );
+  nuevaOperacionStorage = localStorage.setItem("deposito", JSON.stringify(nuevaOperacion));
+  nuevaOperacion != localStorage.getItem("deposito") && guardarLocal("deposito", JSON.stringify(nuevaOperacion));
   //Llamada a las funciones declaradas 
   confirmarOperacion();
-  modificarOpcion();
   agregarTexto();
   modificarOpcion();
+  actualizarSaldoStorage();
 }
+const nombrar = () => "Operacion"
 //Funcion que captura la fecha en que se realiza la operación
-capturarDiaDeposito = () => new Date().toLocaleDateString();
+const capturarDiaDeposito = () => new Date().toLocaleDateString();
 //Funcion que captura la hora en que se realiza la operacion
-capturarHoraDeposito = () => new Date().toLocaleTimeString();
+const capturarHoraDeposito = () => new Date().toLocaleTimeString();
 //Codigo que informa el tipo de operacion
-nombrarOperacion = () => "Depósito";
+const nombrarOperacion = () => "Depósito";
 //Funcion que captura la informacion sobre la operacion provista por el usuari
-depositar = () => inputDepositos.value;
+const depositar = () => inputDepositos.value;
 //Funcion que parsea el numero ingresado por el usuario
-parsearDineroDepositado = () => parseInt(depositar());
+const parsearDineroDepositado = () => parseInt(depositar());
 //Codigo que actualiza el saldo de la caja de ahorro simulada
-actualizarSaldoCajaAhorro = () => {
-  saldoCajaAhorro = parsearDineroDepositado() + saldoCajaAhorro;
+const actualizarSaldoCajaAhorro = () => {
+  saldoCajaAhorro = parsearDineroDepositado() + convertirStorageANumero();
   return saldoCajaAhorro;
 }
+//Funcion que actualiza el saldo almacenado en el localstorage
+const actualizarSaldoStorage = () => saldoCajaAhorro = localStorage.setItem("saldo", actualizarSaldoCajaAhorro());
 //Funcion que convierte a pesos el dato parseado
-numeroADinero = () => numeroAPesos(depositar());
+const numeroADinero = () => numeroAPesos(depositar());
 //Codigo que convierte a pesos el saldo simulado
-convertirSaldoADinero = () => numeroAPesos(actualizarSaldoCajaAhorro());
+const convertirSaldoADinero = () => numeroAPesos(actualizarSaldoCajaAhorro());
 //Funcion que coinvierte un numero al formato de pesos argentinos
-numeroAPesos = (dinero) => {
+const numeroAPesos = (dinero) => {
   return (dinero = new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",
@@ -62,7 +68,7 @@ const text = document.querySelector(".text");
 confirmarOperacion = () => {
   text.innerHTML = "";
   text.innerText = `
-  Operacion realizada con exito. Su saldo es: ${nuevoDeposito.saldo}
+  Operacion realizada con exito. Su saldo es: ${nuevaOperacion.saldo}
   `;
 }
 // Funcion que limpia el campo input en caso de que el usuario quiera modificar el importe a depositar
