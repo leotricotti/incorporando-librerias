@@ -33,11 +33,8 @@ function cargarOperaciones(){
 }
 //Llamada a la funcion
 cargarOperaciones();
-
-
-
 //Funcion que permite ordenar por fecha de realización a las operaciones simuladas
-const operacionesOdenadas = operaciones.sort((a, b) => {
+let operacionesOdenadas = operaciones.sort((a, b) => {
   if (a.fecha < b.fecha) {
     return 1;
   }
@@ -45,7 +42,6 @@ const operacionesOdenadas = operaciones.sort((a, b) => {
     return -1;
   }
 });
-console.log(operacionesOdenadas);
 //Funcion que coinvierte un numero al formato de pesos argentinos
 numeroAPesos = (dinero) => {
   return (dinero = new Intl.NumberFormat("es-AR", {
@@ -65,9 +61,6 @@ cargarCuentas();
 const guardarLocal = (clave, valor) => localStorage.setItem(clave, valor);
 //Llamadas a la funcion para guardar los datos necesarios para iniciar el programa
 guardarLocal("cuentas", JSON.stringify(cuentas));
-//Codigo que crea la variable donde se almacenaran las operaciones simuladas 
-let operacionesInStorage = (localStorage.getItem("operacionesOrdenadas"));
-//Operador avanzado que verifica si existe el objeto opéracionesOrdenadas, si no es así lo crea
-operacionesOdenadas != localStorage.getItem(operacionesOdenadas) && guardarLocal("operacionesOdenadas", JSON.stringify(operacionesOdenadas));
+guardarLocal("operacionesOrdenadas", JSON.stringify(operacionesOdenadas));
 
 
