@@ -134,4 +134,7 @@ opcionModificada.onclick = () => {
 //Funcion que alterna las llamadas a las funciones sobre el mismo boton html
 capturarValor.addEventListener("click", function () {
   seleccionarCuenta(inputTransferencia.value);
+  document.location.href = "monto.html";
 });
+
+
