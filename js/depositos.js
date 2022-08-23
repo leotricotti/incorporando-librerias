@@ -26,8 +26,6 @@ captura.onclick = () => {
     numeroADinero(),
     convertirSaldoADinero()
   );
-  nuevaOperacionStorage = localStorage.setItem("deposito", JSON.stringify(nuevaOperacion));
-  nuevaOperacion != localStorage.getItem("deposito") && guardarLocal("deposito", JSON.stringify(nuevaOperacion));
   //Llamada a las funciones declaradas 
   confirmarOperacion();
   agregarTexto();
