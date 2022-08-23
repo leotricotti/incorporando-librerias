@@ -1,10 +1,10 @@
 //Variable que recupera la informacion del local storage
-let saldoCajaOperable =  localStorage.getItem('saldo');
+let saldoCajaOperable = localStorage.getItem("saldo");
 //Funcion que convierte el dato recuperado del localstorage a numero
 const convertirStorageANumero = () => parseFloat(saldoCajaOperable);
 //Codigo que captura el boton que confirma la operacion
 const captura = document.getElementById("depositos-submit");
-//Codigo que captura el boton que modifica la operacion 
+//Codigo que captura el boton que modifica la operacion
 const clean = document.getElementById("limpiar-campo");
 //Codigo que captura el campo donde el usuario debe ingresar la cantidad de dinerao que desea depsositar
 let inputDepositos = document.getElementById("depositos-input");
@@ -28,13 +28,13 @@ captura.onclick = () => {
     numeroADinero(),
     convertirSaldoADinero()
   );
-  //Llamada a las funciones declaradas 
+  //Llamada a las funciones declaradas
   confirmarOperacion();
   agregarTexto();
   modificarOpcion();
   actualizarSaldoStorage();
-}
-const nombrar = () => "Operacion"
+};
+const nombrar = () => "Operacion";
 //Funcion que captura la fecha en que se realiza la operación
 const capturarDiaDeposito = () => new Date().toLocaleDateString();
 //Funcion que captura la hora en que se realiza la operacion
@@ -49,9 +49,13 @@ const parsearDineroDepositado = () => parseInt(depositar());
 const actualizarSaldoCajaAhorro = () => {
   saldoCajaAhorro = parsearDineroDepositado() + convertirStorageANumero();
   return saldoCajaAhorro;
-}
+};
 //Funcion que actualiza el saldo almacenado en el localstorage
-const actualizarSaldoStorage = () => saldoCajaAhorro = localStorage.setItem("saldo", actualizarSaldoCajaAhorro());
+const actualizarSaldoStorage = () =>
+  (saldoCajaAhorro = localStorage.setItem(
+    "saldo",
+    actualizarSaldoCajaAhorro()
+  ));
 //Funcion que convierte a pesos el dato parseado
 const numeroADinero = () => numeroAPesos(depositar());
 //Codigo que convierte a pesos el saldo simulado
@@ -62,19 +66,28 @@ const numeroAPesos = (dinero) => {
     style: "currency",
     currency: "ARS",
   }).format(dinero));
-}
-//Funcion que devuelve al usuario la confirmacion de su operacion 
+};
+//Funcion que devuelve al usuario la confirmacion de su operacion
 const text = document.querySelector(".text");
-confirmarOperacion = () => {
+const confirmarOperacion = () => {
   text.innerHTML = "";
-  text.innerText = `
-  Operacion realizada con exito. Su saldo es: ${nuevaOperacion.saldo}
-  `;
+  Swal.fire({
+    icon: "success",
+    title: `Operación realizada con éxito.`, 
+    text: `Su saldo es ${nuevaOperacion.saldo}`,
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "Aceptar",
+    showClass: {
+      popup: "animate__animated animate__fadeIn",
+    },
+  }).then(function () {
+    window.location.href = "opcion-depositos.html";
+  });
 }
 // Funcion que limpia el campo input en caso de que el usuario quiera modificar el importe a depositar
 clean.onclick = () => {
   inputDepositos.value = "";
- }
+};
 //Funcion que modifica el HTML al momento de devolver la operacion solicitada por el usuario
 function agregarTexto() {
   //Codigo que agrega texto al html
