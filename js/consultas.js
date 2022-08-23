@@ -46,7 +46,7 @@ function mostarSaldo() {
 //Funcion que al consultar los movimientos devuelve una tabla con los movimientos de las cuentas bancarias simuladas
 function mostarMovimientos() {
   //Llamada a la funcion que recupera valor del local storage
-  const movimientosLocalStorage = JSON.parse(localStorage.getItem("operacionesOdenadas"));
+  const movimientosLocalStorage = JSON.parse(localStorage.getItem("operacionesOrdenadas"));
   //Codigo para cambiar el subtitulo del simulador
   let text = document.querySelector(".text");
   text.innerText = "Ultimos Movimientos";
