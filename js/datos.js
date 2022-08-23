@@ -53,7 +53,7 @@ numeroAPesos = (dinero) => {
     currency: "ARS",
   }).format(dinero));
 }
-//Funcion que carga los objetos literales que contienen la informacion de la de las cuentas bancarias simuladas al array de cuentas
+//Funcion que carga los objetos literales que contienen la informacion de las cuentas bancarias simuladas al array de cuentas
 function cargarCuentas() {
   cuentas.push({tipo: "Caja de Ahorro", moneda: "$", cuenta: "5069-5689756/4", identificador: "Cuenta", saldo: `${numeroAPesos(saldoCajaAhorro)}`});
   cuentas.push({tipo: "Cta Corriente", moneda: "$", cuenta: "5069-5689652/4", identificador: "Cuenta", saldo: "$ 200.000,00"});
