@@ -1,5 +1,9 @@
-//Variable que contiene el saldo inicial
-let saldoCajaAhorro = 150000;
+//Variable que recupera la informacion del local storage
+let saldoCajaOperable = localStorage.getItem("saldo");
+//Funcion que convierte el dato recuperado del localstorage a numero
+const convertirStorageANumero = () => parseFloat(saldoCajaOperable);
+//Variable que almacena el dato convertido a numero
+let saldoOperable = convertirStorageANumero();
 //Array que contiene los servicios proximos a vencer 
 const serviciosPorVencer = [];
 //Funcion que carga las cuentas habilitadas para recibir transferencias
@@ -104,7 +108,8 @@ const seleccionarServicio = (inputValue) =>{
     //Codigo que quita la tabla con las cuentas habilitadas
     tableContainer.innerHTML = "";
     //Funcion que actualiza el saldo de la caja de ahorro
-    actualizarSaldoCajaAhorro = () => saldoCajaAhorro - a.numero; 
+    actualizarSaldoCajaAhorro = () => saldoOperable - a.numero; 
+    actualizarSaldoStorage(); 
   }else if(inputValue == "02"){
     //Codigo para cambiar el subtitulo del simulador y agrega el data del titular de la cuenta como medida de control
     const text = document.querySelector(".text");
@@ -112,7 +117,8 @@ const seleccionarServicio = (inputValue) =>{
     //Codigo que quita la tabla con las cuentas habilitadas
     tableContainer.innerHTML = "";
     //Funcion que actualiza el saldo de la caja de ahorro
-    actualizarSaldoCajaAhorro = () => saldoCajaAhorro - b.numero; 
+    actualizarSaldoCajaAhorro = () => saldoOperable - b.numero; 
+    actualizarSaldoStorage(); 
   }else if(inputValue == "03"){
     //Codigo para cambiar el subtitulo del simulador y agrega el data del titular de la cuenta como medida de control
     const text = document.querySelector(".text");
@@ -120,7 +126,8 @@ const seleccionarServicio = (inputValue) =>{
     //Codigo que quita la tabla con las cuentas habilitadas
     tableContainer.innerHTML = "";
     //Funcion que actualiza el saldo de la caja de ahorro
-    actualizarSaldoCajaAhorro = () => saldoCajaAhorro - c.numero; 
+    actualizarSaldoCajaAhorro = () => saldoOperable - c.numero; 
+    actualizarSaldoStorage(); 
   }else if(inputValue == "04"){
     //Codigo para cambiar el subtitulo del simulador y agrega el data del titular de la cuenta como medida de control
     const text = document.querySelector(".text");
@@ -128,7 +135,8 @@ const seleccionarServicio = (inputValue) =>{
     //Codigo que quita la tabla con las cuentas habilitadas
     tableContainer.innerHTML = "";
     //Funcion que actualiza el saldo de la caja de ahorro
-    actualizarSaldoCajaAhorro = () => saldoCajaAhorro - a.numero; 
+    actualizarSaldoCajaAhorro = () => saldoOperable - d.numero; 
+    actualizarSaldoStorage(); 
   }else if(inputValue == "05"){
     //Codigo para cambiar el subtitulo del simulador y agrega el data del titular de la cuenta como medida de control
     const text = document.querySelector(".text");
@@ -136,7 +144,8 @@ const seleccionarServicio = (inputValue) =>{
     //Codigo que quita la tabla con las cuentas habilitadas
     tableContainer.innerHTML = "";
     //Funcion que actualiza el saldo de la caja de ahorro
-    actualizarSaldoCajaAhorro = () => saldoCajaAhorro - a.numero; 
+    actualizarSaldoCajaAhorro = () => saldoOperable - e.numero;
+    actualizarSaldoStorage(); 
   }//Devuelve un alert si la opcion ingresada es invalida
   else{
     Swal.fire({
@@ -154,6 +163,12 @@ const seleccionarServicio = (inputValue) =>{
   //Codigo que limpia el input
   pagosInput.value = ""; 
 }
+//Funcion que actualiza el saldo almacenado en el localstorage
+const actualizarSaldoStorage = () =>
+  (saldoCajaAhorro = localStorage.setItem(
+    "saldo",
+    actualizarSaldoCajaAhorro()
+  ));
 //Codigo que establece un contador que permite armar el condicional
 let contadorClicks = 0;
 //Funcion que alterna las llamadas a las funciones sobre el mismo boton html
