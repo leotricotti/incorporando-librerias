@@ -67,22 +67,37 @@ const numeroAPesos = (dinero) => {
     currency: "ARS",
   }).format(dinero));
 };
-//Funcion que devuelve al usuario la confirmacion de su operacion
+
+//Codigo que dispara un alerta que confirma o cancela la operación
 const text = document.querySelector(".text");
 const confirmarOperacion = () => {
-  text.innerHTML = "";
   Swal.fire({
-    icon: "success",
-    title: `Operación realizada con éxito.`, 
-    text: `Su saldo es ${nuevaOperacion.saldo}`,
+    icon: "question",
+    title: `Desea depositar la suma de ${numeroADinero()} ?`,
+    confirmButtonText: 'Save',
     confirmButtonColor: "#3085d6",
     confirmButtonText: "Aceptar",
+    showCancelButton: true,
+    cancelButtonText: "Cancelar",
     showClass: {
       popup: "animate__animated animate__fadeIn",
-    },
-  }).then(function () {
-    window.location.href = "opcion-depositos.html";
-  });
+    }
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Operación realizada con exito. Su saldo es ' + convertirSaldoADinero(), '', 'success'
+      ).then(function () {
+        window.location.href = "../opcion/opcion.html";
+      })
+    } else if (result.isDismissed) {
+      Swal.fire(
+        'Operación cancelada', '', 'info'
+      ).then(function () {
+        window.location.href = "../opcion/opcion.html";
+      })
+    }
+  })
 }
 // Funcion que limpia el campo input en caso de que el usuario quiera modificar el importe a depositar
 clean.onclick = () => {
