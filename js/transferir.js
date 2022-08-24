@@ -39,22 +39,31 @@ const numeroAPesos = (dinero) => {
 };
 //Codigo que dispara un alerta que confirma o cancela la operación
 const confirmar = () => {
-  Swal.fire({
+Swal.fire({
     icon: "question",
     title: `Desea transferir a ${cuentaSeleccionada} la suma de ${numeroAPesos(inputTransferencia.value)} `,
+    confirmButtonText: 'Save',
     confirmButtonColor: "#3085d6",
     confirmButtonText: "Aceptar",
     showCancelButton: true,
     cancelButtonText: "Cancelar",
     showClass: {
       popup: "animate__animated animate__fadeIn",
-    },
+    }
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
-      Swal.fire('Saved!', '', 'success')
-    } else if (result.isDenied) {
-      Swal.fire('Changes are not saved', '', 'info')
+      Swal.fire(
+        'Operación realizada con exito', '', 'success'
+      ).then(function () {
+        window.location.href = "opcion-transferencias.html";
+      })
+    } else if (result.isDismissed) {
+      Swal.fire(
+        'Operación cancelada', '', 'info'
+      ).then(function () {
+        window.location.href = "opcion-transferencias.html";
+      })
     }
   })
 }
