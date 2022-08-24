@@ -99,21 +99,32 @@ const [a, b, c, d, e] = cuentasHabilitadas;
 //Funcion que captura la cuenta seleccionada 
 const seleccionarCuenta = (inputValue) => {
   if (inputValue == "01") {
+    //Codigo que almacena en localstorage el nombre del titular de la cuenta a la que se va a enviar dinero para luego ser reutilizado como confirmacion 
     destinatario = localStorage.setItem("destinatario", `${a.titular}`);
+    //Codigo que cambia al html siguiente
+    document.location.href = "monto.html";
   } else if (inputValue == "02") {
-    //Codigo para cambiar el subtitulo del simulador y agrega el data del titular de la cuenta como medida de control
+    //Codigo que almacena en localstorage el nombre del titular de la cuenta a la que se va a enviar dinero para luego ser reutilizado como confirmacion 
     destinatario = localStorage.setItem("destinatario", `${b.titular}`);
+    //Codigo que cambia al html siguiente
+    document.location.href = "monto.html";
   } else if (inputValue == "03") {
-    //Codigo para cambiar el subtitulo del simulador y agrega el data del titular de la cuenta como medida de control
+    //Codigo que almacena en localstorage el nombre del titular de la cuenta a la que se va a enviar dinero para luego ser reutilizado como confirmacion 
     destinatario = localStorage.setItem("destinatario", `${c.titular}`);
+    //Codigo que cambia al html siguiente
+    document.location.href = "monto.html";
   } else if (inputValue == "04") {
-    //Codigo para cambiar el subtitulo del simulador y agrega el data del titular de la cuenta como medida de control
+    //Codigo que almacena en localstorage el nombre del titular de la cuenta a la que se va a enviar dinero para luego ser reutilizado como confirmacion 
     destinatario = localStorage.setItem("destinatario", `${d.titular}`);
+    //Codigo que cambia al html siguiente
+    document.location.href = "monto.html";
   } else if (inputValue == "05") {
-    //Codigo para cambiar el subtitulo del simulador y agrega el data del titular de la cuenta como medida de control
+    //Codigo que almacena en localstorage el titular de la cuenta a la que se va a enviar dinero para ser reutilizado como confirmacion 
     destinatario = localStorage.setItem("destinatario", `${e.titular}`);
-  } //Devuelve un alert si la opcion ingresada es invalida
-  else {
+    //Codigo que cambia al html siguiente
+    document.location.href = "monto.html";   
+  } else {
+    //Funcion que devuelve un alert si la opcion ingresada es invalida
     Swal.fire({
       icon: "warning",
       title: "Ingrese una opción valida",
@@ -134,7 +145,6 @@ opcionModificada.onclick = () => {
 //Funcion que alterna las llamadas a las funciones sobre el mismo boton html
 capturarValor.addEventListener("click", function () {
   seleccionarCuenta(inputTransferencia.value);
-  document.location.href = "monto.html";
 });
 
 
