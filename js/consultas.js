@@ -1,8 +1,8 @@
 //Funcion que al consultar el saldo devuelve una tabla con el saldo de las cuentas bancarias simuladas
 function mostarSaldo() {
-  //Llamada a la funcion que recupera valor del local storage
+  //Codigo que recupera la informacion de las cuentas simuladas del local storage
   const cuentasLocalStorage = JSON.parse(localStorage.getItem("cuentas"));
-  //Codigo para cambiar el subtitulo del simulador
+  //Codigo que cambia el subtitulo del simulador
   let text = document.querySelector(".text");
   text.innerText = "Cuentas";
   //Código que crea el elemento tabla y le asigna sus clases
@@ -24,7 +24,7 @@ function mostarSaldo() {
   //Codigo que crea el cuerpo de la tabla y agrega el divisor entre cabeza y cuerpo
   let tableBody = document.createElement("tbody");
   tableBody.className = "table-group-divider";
-  //Codigo que recorre el array de cuentas creado anteriormente y asigna casda elemento a su culumna
+  //Codigo que recorre el array de cuentas creado anteriormente y asigna cada elemento a su columna
   for (const cuenta of cuentasLocalStorage){
     tableBody.innerHTML += `
         <tr>
@@ -45,7 +45,7 @@ function mostarSaldo() {
 }
 //Funcion que al consultar los movimientos devuelve una tabla con los movimientos de las cuentas bancarias simuladas
 function mostarMovimientos() {
-  //Llamada a la funcion que recupera valor del local storage
+  //Codigo que recupera los movimientos simulados almacenados en el local storage
   const movimientosLocalStorage = JSON.parse(localStorage.getItem("operacionesOrdenadas"));
   //Codigo para cambiar el subtitulo del simulador
   let text = document.querySelector(".text");
